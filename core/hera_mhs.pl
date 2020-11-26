@@ -3,12 +3,8 @@
 
 % Minimal Hitting Sets M of the list of lists L
 mhs(M, L) :-
-    findall(X, hs(X, L), H),
-    filterMin(H, H, [], Min),
-    filterInconsistent(Min, M).
-
-filterInconsistent(Min, M) :-
-    findall(X, (member(X, Min), consistent(X)), M).
+    findall(X, (hs(X, L), consistent(X)), H),
+    filterMin(H, H, [], M).
 
 /*
 * hs(+HittingSet, +SetOfSets)

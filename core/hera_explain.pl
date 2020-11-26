@@ -4,9 +4,21 @@
 
 necc_reasons(F, R) :-
     findall(M, sat(F, M), L),
-    mhs(H, L),
+    filterduplicates(L, L2),
+    mhs(H, L2),
     findall(Holds, holds(Holds), HoldsList),
-    findall(X, (member(Y, H), intersection(Y, HoldsList, X)), R).
+    findall(X, (member(Y, H), intersection(Y, HoldsList, X)), K),
+    filterduplicates(K, R).
+
+filterduplicates(L, L2) :-
+    filterduplicates(L, [], L2).
+filterduplicates([], L, L).
+filterduplicates([X | R], L, E) :-
+    \+ member(X, L),
+    filterduplicates(R, [X | L], E).
+filterduplicates([X | R], L, E) :-
+    member(X, L),
+    filterduplicates(R, L, E).
 
 suff_reasons(F, H) :-
     necc_reasons(F, I),
