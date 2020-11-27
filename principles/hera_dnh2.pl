@@ -1,7 +1,5 @@
 :- module(principle, [  holds/1,
                         principle_formula/1,
-                        init_principle/0,
-                        prepare_model/0,
                         is_permissible/0,
                         explain_judgment/1]).
 :- dynamic  holds/1,
@@ -15,7 +13,8 @@ init_principle :-
     findall(impl(caused(X), not(bad(X))), utility(X, _), L),
     make_conjunction(L, C),
     nnf(C, F),
-    assertz(principle_formula(F)).
+    assertz(principle_formula(F)),
+    prepare_model.
 
 prepare_model :-
     plan(Program), 
@@ -35,3 +34,5 @@ explain_judgment(D) :-
         reasons(F, D);
          (nnf(not(F), F2), reasons(F2, D))
     ).
+
+:- init_principle.
