@@ -36,5 +36,4 @@ explain_judgment(D) :-
          (nnf(not(F), F2), reasons(F2, D))
     ).
 
-
 :- init_principle.

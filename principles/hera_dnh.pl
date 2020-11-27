@@ -1,4 +1,4 @@
-:- module(principle, [  holds/1,
+- module(principle, [  holds/1,
                         principle_formula/1,
                         is_permissible/0,
                         explain_judgment/1]).
