@@ -1,18 +1,15 @@
-:- use_module("./core/hera_explain.pl", [suff_reasons/2, necc_reasons/2, inus_reasons/2]).
+:- use_module("./explanation/hera_explain.pl", [reasons/2]).
+:- compile("./domains/trolley.pl").
+:- compile("./principles/hera_dnh.pl").
 
-assumable(caused(a)).
-assumable(bad(a)).
-%assumable(a).
-%assumable(b).
+% TODO: World has to be computed rather than asserted
+holds(not(caused(dead1))).
+holds(bad(dead1)).
+holds(not(bad(not(dead1)))).
+holds(not(caused(dead5))).
+holds(bad(dead5)).
+holds(not(bad(not(dead5)))).
+holds(not(caused(not(dead1)))).
+holds(not(caused(not(dead5)))).
 
-holds(not(caused(a))).
-holds(bad(a)).
-%holds(a).
-%holds(not(b)).
-
-formula(impl(caused(a), not(bad(a)))).
-%formula(impl(a, not(b))).
-
-:- formula(F), suff_reasons(F, S), write("Suff: " ), writeln(S).
-:- formula(F), necc_reasons(F, N), write("Necc: " ), writeln(N).
-:- formula(F), inus_reasons(F, I), write("Inus: " ), writeln(I).
+:- principle_formula(F), reasons(F, D), writeln(D).
