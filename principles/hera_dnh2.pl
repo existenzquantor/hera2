@@ -12,18 +12,17 @@
 :- use_module("./explanation/hera_explain.pl", [reasons/2]).
 
 init_principle :-
-    plan(Program),
-    findall(impl(caused(X), not(bad(X))), (utility(X, _), finally(Program, X)), L),
+    findall(impl(caused(X), not(bad(X))), utility(X, _), L),
     make_conjunction(L, C),
     nnf(C, F),
     assertz(principle_formula(F)).
 
 prepare_model :-
     plan(Program), 
-    forall((utility(X, _), finally(Program, X), cause_empty_temporal(Program, X, _)), assertz(holds(caused(X)))),
-    forall((utility(X, _), finally(Program, X), \+cause_empty_temporal(Program, X, _)), assertz(holds(not(caused(X))))),
-    forall((utility(X, N), N < 0, finally(Program, X)), assertz(holds(bad(X)))),
-    forall((utility(X, N), N >= 0, finally(Program, X)), assertz(holds(not(bad(X))))).
+    forall((utility(X, _), cause_empty_temporal(Program, X, _)), assertz(holds(caused(X)))),
+    forall((utility(X, _), \+cause_empty_temporal(Program, X, _)), assertz(holds(not(caused(X))))),
+    forall((utility(X, N), N < 0), assertz(holds(bad(X)))),
+    forall((utility(X, N), N >= 0), assertz(holds(not(bad(X))))).
 
 is_permissible :-
     findall(X, holds(X), Model),
