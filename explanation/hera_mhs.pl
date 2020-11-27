@@ -1,4 +1,4 @@
-:- module(hera_mhs, [mhs/2]).
+- module(hera_mhs, [mhs/2]).
 :- use_module(hera_logic, [consistent/1]).
 
 % Minimal Hitting Sets M of the list of lists L

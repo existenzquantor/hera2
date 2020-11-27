@@ -38,8 +38,9 @@ sat(and(A, B), Model) :-
     sat(A, Model),
     sat(B, Model).
 
-sat(or(A, B), Model) :-
-    sat(A, Model);
+sat(or(A, _), Model) :-
+    sat(A, Model), !.
+sat(or(_, B), Model) :-
     sat(B, Model).
 
 sat(impl(A, B), Model) :-
