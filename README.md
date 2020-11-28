@@ -23,10 +23,12 @@ To see if giving flowers to celia is morally permissible, you can run:
 > ./hera.pl flowers humanity evaluate                                                                                        [16:36:44]
 false
 ```
-For this to work, SWI Prolog must be installed (so, the swipl command should invoke the prolog environment). The first argument denotes the name of the domain description. The program assumes that the domain description will be found at the location ./domains/<name>.pl. The second argument denotes the moral principle to be used. In this case we use the Kantian Humanity Principle (cf., https://plato.stanford.edu/entries/persons-means/). The third argument specifies the task. In this case, the plan should be evaluated. As an answer you can expect either true (the plan is morally permissible) or false (the plan is morally impermissible).
+For this to work, SWI Prolog must be installed (so, the swipl command should invoke the prolog environment). The first argument denotes the name of the domain description. The program assumes that the domain description will be found at the location ./domains/<name>.pl. The second argument denotes the moral principle to be used. In this case we use the Kantian Humanity Principle (cf., https://plato.stanford.edu/entries/persons-means/). The third argument specifies the task. In this case, the plan should be evaluated. As an answer you can expect either true (the plan is morally permissible) or false (the plan is morally impermissible). The flower example is impermissible. This is because celia is used merely as a means to make alice happy. This can be fixed by adding celia_happy to the goal---now celia is also used as an end.
 
-
+HERA also comes with an inbuilt explanation functionality. This can be invoked by specifying the task "explain":
 ```bash
 > /hera.pl flowers humanity explain 
-{suff:[[means(celia),not(goal(celia))]],necc:[[means(celia)],[not(goal(celia))]],inus:[[means(celia)],[not(goal(celia))]]}
+{suff:[[means(celia),not(end(celia))]],necc:[[means(celia)],[not(end(celia))]],inus:[[means(celia)],[not(end(celia))]]}
 ```
+
+The explanation nicely fits to the explanation I have given above: The reason why giving flowers is impermissible is that celia is a means but not an end (suffm = sufficient reason). Moreover, the output refers to necessary reasons (necc): Using celia as a means was necessary for the plan being impermissible, and so was not using celia as an end. From this one can extract two repair strategies: Either find a plan that does not use celia as a means, or use celia as an end. The last entry in the resulting dictionary refers to INUS reasons. INUS reasons are necessary parts of sufficient reasons. They do not always exist, but if they exist they tend to be shorter and more to the point as compared to suff and necc reasons. In this toy example, necc and inus are equal.
