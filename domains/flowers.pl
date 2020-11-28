@@ -10,3 +10,6 @@ plan(give_flowers).
 
 affects(celia_happy, celia, pos).
 affects(alice_happy, alice, pos).
+
+utility(celia_happy, 1).
+utility(alice_happy, 1).
