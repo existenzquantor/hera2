@@ -1,5 +1,6 @@
 Ongoing work towards a Prolog reimplementation of HERA. Currently, it is assumed that the folder containing the causality library (https://github.com/existenzquantor/causality) is located next to the hera2 folder, i.e., in some common parent folder.
 
+The input to hera consists of a formal description of the domain, task, plan, and ethical properties of actions and facts. The following description models the famous Giving-Flowers Example (cf., https://github.com/existenzquantor/ethics).
 
 ```prolog
 effect(give_flowers, [], [celia_happy]).
