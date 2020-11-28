@@ -1,5 +1,5 @@
 # Brief Description
-Ongoing work towards a Prolog reimplementation of HERA. 
+This repository contains work towards a Prolog reimplementation of HERA (see https://github.com/existenzquantor/ethics). 
 
 # Installation
 SWI Prolog (https://www.swi-prolog.org/) must be installed on the system to run the HERA program. SWI Prolog is available for many operating systems. In a MacOS environment, you can install SWI Prolog using brew by typing ```brew install swipl```, under Ubuntu Linux it is ```apt install swipl```, and binaries for Windows are also available on the SWI Prolog download website. 
