@@ -10,7 +10,7 @@
 :- use_module("./explanation/hera_explain.pl", [reasons/2]).
 
 init_principle :-
-    findall(impl(means(X), goal(X)), affects(_, X, _), L),
+    findall(impl(means(X), end(X)), affects(_, X, _), L),
     list_to_set(L, S),
     make_conjunction(S, C),
     nnf(C, F),
@@ -20,8 +20,8 @@ init_principle :-
 prepare_model :-
     plan(Program), 
     forall((finally(Program, X), cause_empty_temporal(Program, X, _), affects(X, P, _)), assertz(holds(means(P)))),
-    forall((goal(X), member(F, X), affects(F, P, pos)), assertz(holds(goal(P)))),
-    forall((affects(_, P, _), \+ holds(goal(P))), assertz(holds(not(goal(P))))),
+    forall((goal(X), member(F, X), affects(F, P, pos)), assertz(holds(end(P)))),
+    forall((affects(_, P, _), \+ holds(end(P))), assertz(holds(not(end(P))))),
     forall((affects(_, P, _), \+ holds(means(P))), assertz(holds(not(means(P))))).
 
 is_permissible :-
