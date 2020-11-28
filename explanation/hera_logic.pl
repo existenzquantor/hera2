@@ -56,27 +56,15 @@ mysubset([_ | L1], L2) :-
 mysubset([E | L1], [E | L2]) :-
     mysubset(L1, L2).
 
-
 sat(A, Model) :-
     member(A, Model), !.
-
 sat(and(A, B), Model) :-
     sat(A, Model),
     sat(B, Model), !.
-
 sat(or(A, _), Model) :-
     sat(A, Model), !.
 sat(or(_, B), Model) :-
     sat(B, Model), !.
-
-%sat(impl(A, B), Model) :-
-%    sat(or(not(A), B), Model).
-
-%sat(not(A), Model) :-
-%    \+ sat(A, Model).
-
-%sat(not(not(A)), Model) :-
-%    sat(A, Model).
 
 make_conjunction(L, F) :-
     make_conjunction(L, [], F).

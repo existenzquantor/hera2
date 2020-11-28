@@ -6,7 +6,6 @@
             principle_formula/1.
 :- use_module("../explanation/hera_logic.pl", [sat/2,make_conjunction/2, nnf/2]).
 :- use_module("../../causality/core/causality.pl", [cause_empty_temporal/3]).
-:- use_module("../../causality/core/interpreter.pl", [finally/2]).
 :- use_module("./explanation/hera_explain.pl", [reasons/2]).
 
 init_principle :-
