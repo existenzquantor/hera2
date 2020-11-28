@@ -1,6 +1,13 @@
-Ongoing work towards a Prolog reimplementation of HERA. Currently, it is assumed that the folder containing the causality library (https://github.com/existenzquantor/causality) is located next to the hera2 folder, i.e., in some common parent folder.
+# Brief Description
+Ongoing work towards a Prolog reimplementation of HERA. 
 
-The input to hera consists of a formal description of the domain, task, plan, and ethical properties of actions and facts. The following description models the famous Giving-Flowers Example (cf., https://github.com/existenzquantor/ethics).
+# Installation
+SWI Prolog (https://www.swi-prolog.org/) must be installed on the system to run the HERA program. SWI Prolog is available for many operating systems. In a MacOS environment, you can install SWI Prolog using brew by typing ```brew install swipl```, under Ubuntu Linux it is ```apt install swipl```, and binaries for Windows are also available on the SWI Prolog download website. 
+
+To get started, first clone this github repository. Currently, it is assumed that the folder containing the causality library (https://github.com/existenzquantor/causality) is located next to the hera2 folder, i.e., in some common parent folder. Thus, you may need to clone the causality github repository, as well.
+
+# Using hera2
+The input to hera2 consists of a formal description of the domain, task, plan, and ethical properties of actions and facts. The following description models the famous Giving-Flowers Example (cf., https://github.com/existenzquantor/ethics).
 
 ```prolog
 effect(give_flowers, [], [celia_happy]).
@@ -18,7 +25,7 @@ affects(alice_happy, alice, pos).
 
 The first line represents the action give_flowers. The action has no preconditions (this explains why the second argument is an empty list) and the effect of that action is that celia will be happy (as expressed by the third argument). The second line represents the empty action (doing nothing). The third line models an event rather than an action. This is signalled by the first argument being an integer rather than a name. By convention, numbers start counting with 0. Thus, the expression says that after action 0 (viz., the first action in an action sequence), an event will fire that will make alice happy (effect) if celia is already happy (precondition). The next line represents the initial situation, viz., neither celia nor alice are happy. The goal is to make alice happy. The plan is to give flowers. This plan indeed achieves the goal: Give flowers will make celia happy, then the event will fire and alice will be happy as well. (Note that all events' preconditions are evaluated at the state that results from the performed action. This way, infinite fire chains of events are not possible.) The last two lines represent knowledge about how facts affect persons: The truth of celia_happy affects celia positively and alice_happy affects alice positively. (The first argument can also be a negated fact, and the third argument can be neg instead of pos.)
 
-To see if giving flowers to celia is morally permissible, you can run:
+To see if giving flowers to celia is morally permissible, you can run the hera.pl script located in the hera2 folder:
 ```bash
 > ./hera.pl flowers humanity evaluate                                                                                        [16:36:44]
 false
