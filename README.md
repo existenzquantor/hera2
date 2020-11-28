@@ -34,7 +34,7 @@ For this to work, SWI Prolog must be installed (so, the swipl command should inv
 
 HERA also comes with an inbuilt explanation functionality. This can be invoked by specifying the task "explain":
 ```bash
-> /hera.pl flowers humanity explain 
+> ./hera.pl flowers humanity explain 
 {suff:[[means(celia),not(end(celia))]],necc:[[means(celia)],[not(end(celia))]],inus:[[means(celia)],[not(end(celia))]]}
 ```
 
