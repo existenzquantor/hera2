@@ -1,4 +1,4 @@
-Ongoing work towards a Prolog reimplementation of HERA. Depends on the causality library found here: https://github.com/existenzquantor/causality .
+Ongoing work towards a Prolog reimplementation of HERA. Currently, it is assumed that the folder containing the causality library (https://github.com/existenzquantor/causality) is located next to the hera2 folder, i.e., in some common parent folder.
 
 
 ```prolog
