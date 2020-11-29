@@ -39,3 +39,10 @@ HERA also comes with an inbuilt explanation functionality. This can be invoked b
 ```
 
 The explanation nicely fits to the explanation I have given above: The reason why giving flowers is impermissible is that celia is a means but not an end (suff = sufficient reason). Moreover, the output refers to necessary reasons (necc): Using celia as a means was necessary for the plan being impermissible, and so was not using celia as an end. From this one can extract two repair strategies: Either find a plan that does not use celia as a means, or use celia as an end. The last entry in the resulting dictionary refers to INUS reasons. INUS reasons are necessary parts of sufficient reasons. They do not always exist, but if they exist they tend to be shorter and more to the point as compared to suff and necc reasons. In this toy example, necc and inus are equal.
+
+# Available Principles
+
+* ```deon```: Simple Deontology Principle: Plan is permissible iff the plan does not contain any morally bad actions.
+* ```dnh```: Do No Harm Principle: Plan is permissible iff none of the harm in the final state is caused by the actions in the plan.
+* ```dnih```: Do No Instrumental Harm Principle: Plan is permissible iff none of the harm in the final state is instrumental for achieving the goal, i.e., harm is only allowed as side effect.
+* ```humanity```: Kantian Humanity Principle: Plan is permissible iff everybody affected by some caused fact is positively affected by a goal.
