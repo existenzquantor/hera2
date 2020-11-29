@@ -46,3 +46,4 @@ The explanation nicely fits to the explanation I have given above: The reason wh
 * ```dnh```: Do No Harm Principle: Plan is permissible iff none of the harm in the final state is caused by the actions in the plan.
 * ```dnih```: Do No Instrumental Harm Principle: Plan is permissible iff none of the harm in the final state is instrumental for achieving the goal, i.e., harm is only allowed as side effect.
 * ```humanity```: Kantian Humanity Principle: Plan is permissible iff everybody affected by some caused fact is positively affected by a goal.
+* ... to be continued ...
