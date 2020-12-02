@@ -27,12 +27,12 @@ The first line represents the action give_flowers. The action has no preconditio
 
 To see if giving flowers to celia is morally permissible, you can run the hera.pl script located in the hera2 folder:
 ```bash
-> ./hera.pl flowers humanity evaluate                                                                                        [16:36:44]
+> swipl hera.pl flowers humanity evaluate
 false
 ```
-For this to work, SWI Prolog must be installed (so, the swipl command should invoke the prolog environment), and the hera.pl script must be set as executable. Under unix-like systems, this can be achieved by typing ```chmod +x hera.pl```. Alternatively, the program can also be executed by running:
+For this to work, SWI Prolog must be installed (so, the swipl command should invoke the prolog environment). The hera.pl script can also be set as executable. Under unix-like systems, this can be achieved by typing ```chmod +x hera.pl```. As a result, the program can also be executed by running:
 ```bash
-> swipl hera.pl flowers humanity evaluate                                                                                        [16:36:44]
+> ./hera.pl flowers humanity evaluate
 false
 ```
 
