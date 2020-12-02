@@ -15,7 +15,7 @@ init_principle :-
     list_to_set(L, S),
     make_conjunction(S, C),
     nnf(C, F),
-    assertz(principle_formula(F)),writeln(F),
+    assertz(principle_formula(F)),
     prepare_model.
 
 prepare_model :-

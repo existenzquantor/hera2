@@ -20,6 +20,12 @@ nnf(not(impl(F, G)), and(F2, G2)) :-
 nnf(impl(F, G), or(F2, G2)) :-
     nnf(not(F), F2),
     nnf(G, G2), !.
+nnf(not(biimpl(F, G)), not(and(F2, G2))) :-
+    nnf(impl(F, G), F2),
+    nnf(impl(G, F), G2), !.
+nnf(biimpl(F, G), and(F2, G2)) :-
+    nnf(impl(F, G), F2),
+    nnf(impl(G, F), G2), !.
 nnf(and(F, G), and(F1, G1)) :-
     nnf(F, F1), 
     nnf(G, G1), !.
