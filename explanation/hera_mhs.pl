@@ -1,14 +1,26 @@
 :- module(hera_mhs, [mhs/2]).
 :- use_module(hera_logic, [consistent/1]).
 
-% Minimal Hitting Sets M of the list of lists L
+%! mhs(-M, +L)
+% True if M is a hitting sets of the list of lists L
 mhs(M, L) :-
-    findall(X, (hs(X, L), consistent(X)), H),
-    filterMin(H, H, [], M).
+    findall(X, (hs(X, L), consistent(X)), HC),
+    filterMin(HC, HC, [], M).
 
-/*
-* hs(+HittingSet, +SetOfSets)
-*/
+filterConsistent(H, HC) :-
+    filterConsistent(H, [], HC).
+filterConsistent([], HC, HC).
+filterConsistent([L | R], H, HC) :-
+    consistent(L),
+    filterConsistent(R, [L | H], HC).
+filterConsistent([L | R], H, HC) :-
+    \+consistent(L),
+    filterConsistent(R, H, HC).
+
+
+
+%! hs(-HittingSet, +ListOfLists)
+% True if HittingSet hits every list in ListOfLists
 hs(H, L) :-
    length(L, I),
     hs([], L, 0, I, H).
@@ -32,11 +44,9 @@ hs(H, L, M, N, S) :-
     M2 is M + 1,
     hs(H, L, M2, N, S).
 
-hasSubset(H, [I | _]) :-
-    H \= I,
-    subset(I, H), !.
-hasSubset(H, [_ | L]) :-
-    hasSubset(H, L).
+hasSubset(H, [I | J]) :-
+    ((H \= I, H \= [],
+    subset(I, H), \+subset(H, I)) -> true; hasSubset(H, J)).
 
 filterMin(_, [], L, L).
 filterMin(H, [A | R1], L, Erg) :-
