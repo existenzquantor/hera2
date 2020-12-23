@@ -1,4 +1,4 @@
-:- module(hera_mhs, [mhs/2]).
+:- module(hera_mhs, [mhs/2, filterduplicates/2]).
 :- use_module(hera_logic, [consistent/1]).
 
 %! mhs(-M, +L)
@@ -17,7 +17,15 @@ filterConsistent([L | R], H, HC) :-
     \+consistent(L),
     filterConsistent(R, H, HC).
 
-
+filterduplicates(L, L2) :-
+    filterduplicates(L, [], L2).
+filterduplicates([], L, L).
+filterduplicates([X | R], L, E) :-
+    \+ hasEqual(X, L),
+    filterduplicates(R, [X | L], E).
+filterduplicates([X | R], L, E) :-
+    hasEqual(X, L),
+    filterduplicates(R, L, E).
 
 %! hs(-HittingSet, +ListOfLists)
 % True if HittingSet hits every list in ListOfLists
@@ -43,6 +51,10 @@ hs(H, L, M, N, S) :-
     IN > 0,
     M2 is M + 1,
     hs(H, L, M2, N, S).
+
+hasEqual(H, [I | J]) :-
+    ((subset(I, H),
+      subset(H, I)) -> true; hasEqual(H, J)).
 
 hasSubset(H, [I | J]) :-
     ((H \= I, H \= [],

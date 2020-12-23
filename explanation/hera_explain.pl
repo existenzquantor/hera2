@@ -1,6 +1,6 @@
 :- module(hera_explain, [reasons/2]).
 :- use_module(hera_logic, [sat/2, model/1]).
-:- use_module(hera_mhs, [mhs/2]).
+:- use_module(hera_mhs, [mhs/2, filterduplicates/2]).
 
 reasons(F, {"suff":S,"necc":N,"inus":R}) :-
     necc_reasons(F, N),
@@ -14,16 +14,6 @@ necc_reasons(F, R) :-
     findall(Holds, holds(Holds), HoldsList),
     findall(X, (member(Y, H), intersection(Y, HoldsList, X)), K),
     filterduplicates(K, R).
-
-filterduplicates(L, L2) :-
-    filterduplicates(L, [], L2).
-filterduplicates([], L, L).
-filterduplicates([X | R], L, E) :-
-    \+ member(X, L),
-    filterduplicates(R, [X | L], E).
-filterduplicates([X | R], L, E) :-
-    member(X, L),
-    filterduplicates(R, L, E).
 
 suff_reasons(Necc, H) :-
     mhs(H, Necc).
