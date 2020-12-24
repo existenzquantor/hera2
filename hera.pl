@@ -7,7 +7,7 @@ main(Argv) :-
         string_concat("./domains/", Domain, StrDomain0),
         string_concat(StrDomain0, ".pl", StrDomain),
         compile(StrDomain),
-        string_concat("./principles/hera_", Principle, StrPr0),
+        string_concat("./principles/", Principle, StrPr0),
         string_concat(StrPr0, ".pl", StrPr),
         use_module(StrPr),
         nth0(2, Argv, Task),
