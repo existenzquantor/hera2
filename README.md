@@ -54,5 +54,5 @@ The explanation nicely fits to the explanation I have given above: The reason wh
 * ```dnh```: Do No Harm Principle: Plan is permissible iff none of the harm in the final state is caused by the actions in the plan.
 * ```dnih```: Do No Instrumental Harm Principle: Plan is permissible iff none of the harm in the final state is instrumental for achieving the goal, i.e., harm is only allowed as side effect.
 * ```humanity```: Kantian Humanity Principle: Plan is permissible iff everybody affected by some caused fact is positively affected by a goal.
-* ```dde```: Doctrine of double effect: Plan is permissible iff i) none of the actions in the plan is inherently bad, ii) the plan was done with no bad intentions, iii) no bad things were instrumental for achieving the goal, iii) bad outcomes of the plan are compensated by good outcomes of the plan.
+* ```dde```: Doctrine of double effect: Plan is permissible iff i) none of the actions in the plan is inherently bad, ii) the plan was done with no bad intentions, iii) no bad things were instrumental for achieving the goal, iv) bad outcomes of the plan are compensated by good outcomes of the plan.
 * ... to be continued ...
