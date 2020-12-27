@@ -1,4 +1,6 @@
-:- module(hera_logic, [sat/2, consistent/1, model/1, make_conjunction/2, nnf/2]).
+:- module(hera_logic, [sat/1, sat/2, consistent/1, model/1, make_conjunction/2, nnf/2, reachable_state/1, negate/2]).
+:- use_module("../../causality/core/interpreter.pl", [generate_plan/3]).
+
 
 %! consistent(+M)
 % True if M is a consistent set of literals
@@ -8,7 +10,11 @@ consistent(M) :-
     findall(X, (member(caused(X), M), negate(X, Y), member(Y, M)), L2),
     length(L2, 0),
     findall(X, (member(caused(X), M), negate(X, Y), member(caused(Y), M)), L3),
-    length(L3, 0).
+    length(L3, 0),
+    findall(X, (member(X, M), X = not(geq(A, A))), L4),
+    length(L4, 0),
+    findall(X, (member(X, M), member(Y, M), member(Z, M), X = geq(C, B), Y = geq(B, A), Z = not(geq(C, A))), L5),
+    length(L5, 0).
 
 %! nnf(+F, -E)
 % True if E is the negation normal form of F
@@ -53,6 +59,19 @@ negate_all([A | T], L, E) :-
     negate(A, A2),
     negate_all(T, [A2 | L], E).
 
+%! reachable_state(+S)
+%  True if there is a plan that transitions the initial state to S
+reachable_state(S) :-
+    init(M),
+    length(M, N),
+    negate_all(M, MNeg),
+    union(M, MNeg, MU),
+    mysubset(MU, S),
+    length(S, N),
+    consistent(S),
+    Len is N**2,
+    generate_plan(Len, S, _).
+
 %! model(+Model)
 % True if Model contains L or not(L) for each literal L in the domain
 model(Model) :- 
@@ -81,7 +100,7 @@ sat(or(A, _), Model) :-
     sat(A, Model), !.
 sat(or(_, B), Model) :-
     sat(B, Model), !.
-sat(geq(A, B), _) :-
+sat(geq(A, B)) :-
     sum_util(A, SA),
     sum_util(B, SB),
     SA >= SB.
@@ -91,12 +110,14 @@ is_literal(L) :-
 is_literal(not(L)) :-
     atom(L).
 
-sum_util(C, U) :-
-    (utility(C, U) -> true; U is 0).
 sum_util(and(A, B), U) :-
-    sum_util(A, UA),
-    sum_util(B, UB),
+    sum_util(A, UA), !,
+    sum_util(B, UB), !,
     U is UA + UB.
+sum_util(C, U) :-
+    utility(C, U), !.
+sum_util(_, 0).
+
 
 
 %! make_conjunction(+List, -Formula)

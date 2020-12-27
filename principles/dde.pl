@@ -4,7 +4,7 @@
                         explain_judgment/1]).
 :- dynamic  holds/1,
             principle_formula/1.
-:- use_module("../explanation/hera_logic.pl", [sat/2,make_conjunction/2, nnf/2]).
+:- use_module("../explanation/hera_logic.pl", [sat/1, sat/2,make_conjunction/2, nnf/2]).
 :- use_module("../../causality/core/causality.pl", [cause_empty_temporal/3]).
 :- use_module("../../causality/core/interpreter.pl", [finally/2]).
 :- use_module("./explanation/hera_explain.pl", [reasons/2]).
@@ -42,8 +42,7 @@ proportionality :-
     findall(X, finally(empty, X), S2),
     make_conjunction(S1, C1),
     make_conjunction(S2, C2),
-    findall(X, holds(X), Model),
-    (sat(geq(C1, C2), Model) -> assertz(holds(geq(C1, C2)))
+    (sat(geq(C1, C2)) -> assertz(holds(geq(C1, C2)))
     ; assertz(holds(not(geq(C1, C2))))
     ).
     

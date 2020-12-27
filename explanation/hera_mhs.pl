@@ -5,6 +5,7 @@
 % True if M is a hitting sets of the list of lists L
 mhs(M, L) :-
     findall(X, (hs(X, L), consistent(X)), HC),
+    %filterConsistent(H, HC),
     filterMin(HC, HC, [], M).
 
 filterConsistent(H, HC) :-

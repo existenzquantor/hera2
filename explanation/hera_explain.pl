@@ -8,7 +8,7 @@ reasons(F, {"suff":S,"necc":N,"inus":R}) :-
     inus_reasons(S, N, R).
     
 necc_reasons(F, R) :-
-    findall(M, (model(M), sat(F, M)), L),
+    findall(M, (model(M), sat(F, M)), L), 
     filterduplicates(L, L2),
     mhs(H, L2),
     findall(Holds, holds(Holds), HoldsList),
