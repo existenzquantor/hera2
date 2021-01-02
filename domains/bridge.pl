@@ -1,4 +1,4 @@
-nit([not(man_on_track), not(dead)]).
+init([not(man_on_track), not(dead)]).
 
 effect(push, [], [man_on_track]).
 effect(0, [not(man_on_track)], [dead]).
